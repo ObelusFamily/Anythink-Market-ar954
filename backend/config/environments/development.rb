@@ -8,6 +8,8 @@ Rails.application.configure do
 
   # Do not eager load code on boot.
   config.eager_load = false
+  config.hosts << ENV['GITPOD_HOST_URL'] 
+  config.hosts << '3001-obelusfamil-anythinkmar-d1ra68fvubm.ws-us53.gitpod.io'
 
   # Show full error reports.
   config.consider_all_requests_local = true
