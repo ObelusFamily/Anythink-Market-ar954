@@ -16,9 +16,11 @@ ports:
 tasks:
   - name: Docker
     command: docker-compose up && gp sync-done docker
-    openMode: split-left
-  - name: Seed Database 
-    before: gp sync-await docker # wait for the above 'docker' to finish
-    init: sh ./backend/seeds.sh
-    command: echo 'ALL DONE! Enjoy :)'
     openMode: split-right
+  - name: Run migrations & Seed Database
+    init: echo "Waiting for docker to finish..." && gp sync-await docker
+    command: >
+      docker exec -it anythink-backend bash -c "cd backend && rails db:migrate" &&
+      docker exec -it anythink-backend bash -c "cd backend && ./seeds.sh" &&
+      echo "ALL DONE! :) Enjoy."
+    openMode: split-left
