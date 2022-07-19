@@ -12,7 +12,3 @@ ports:
     description: The DB for Anythink
     port: 5433
     onOpen: ignore
-
-tasks:
-  - name: docker-compose
-    command: docker-compose up
